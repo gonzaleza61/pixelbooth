@@ -53,7 +53,7 @@ function App() {
       {/* <Environment preset="city" /> */}
       <directionalLight
         ref={directionalLightRef}
-        intensity={1.5}
+        intensity={1.6}
         castShadow
         position={[10, 5, 0]}
       />
