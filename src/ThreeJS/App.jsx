@@ -62,7 +62,7 @@ function App() {
         {/* <Debug /> */}
 
         {/* Floor */}
-        <RigidBody type="fixed" colliders="trimesh" position={[-3, 1.8, 3.5]}>
+        <RigidBody type="fixed" colliders="trimesh" position={[-2, 1.8, 2]}>
           <Text3D
             font="./Bebas_Neue_Regular.json"
             bevelThickness={0.2}
@@ -70,23 +70,23 @@ function App() {
             size={0.9}
             lineHeight={0.6}
             bevelEnabled
-            rotation-y={1.5}
+            rotation-y={Math.PI * .5}
             castShadow
           >
-            {"Houston\nPixel\nPhotobooth"}
+            {"HOUSTON\nPixel\nPhotobooth"}
             <meshStandardMaterial color={"red"} />
           </Text3D>
         </RigidBody>
 
-        <RigidBody type="fixed" position={[0, -1, 0]} restitution={1}>
+        <RigidBody type="fixed" position={[0, -.5, 0]} restitution={1}>
           <mesh receiveShadow>
-            <boxGeometry args={[20, 2, 20]} />
+            <boxGeometry args={[8, 1, 8]} />
             <meshStandardMaterial color="white" />
           </mesh>
         </RigidBody>
 
         <Float floatIntensity={4}>
-          <KanyeGlasses position={[0, 1.3, 0]}/>
+          <KanyeGlasses position={[1, 2, 0]}/>
         </Float>
       </Physics>
     </>
