@@ -14,7 +14,10 @@ import { Debug, Physics, RigidBody } from "@micmania1/react-three-rapier";
 import * as THREE from "three";
 import { useRef } from "react";
 
+import { WoodFloor } from '../assets/Models/WoodFloor'
 import { KanyeGlasses } from "../assets/Models/KanyeGlasses";
+import { TheaterSpotlight } from "../assets/Models/TheaterSpotlight";
+import { CameraStand } from "../assets/Models/CameraStand";
 import { AviatorGlasses } from "../assets/Models/AviatorGlasses";
 import { Mustache } from "../assets/Models/Mustache";
 import { TopHat } from "../assets/Models/Tophat";
@@ -49,8 +52,7 @@ function App() {
     <>
       <Perf position="bottom-left" />
       <OrbitControls makeDefault />
-      <ambientLight/>
-      {/* <Environment preset="city" /> */}
+      <ambientLight />
       <directionalLight
         ref={directionalLightRef}
         intensity={1.5}
@@ -70,24 +72,74 @@ function App() {
             size={0.9}
             lineHeight={0.6}
             bevelEnabled
-            rotation-y={Math.PI * .5}
+            rotation-y={Math.PI * 0.5}
             castShadow
+            receiveShadow
           >
             {"HOUSTON\nPixel\nPhotobooth"}
             <meshStandardMaterial color={"red"} />
           </Text3D>
         </RigidBody>
 
-        <RigidBody type="fixed" position={[0, -.5, 0]} restitution={1}>
+        <RigidBody type="fixed" position={[0, -0.5, 0]} restitution={1}>
           <mesh receiveShadow>
-            <boxGeometry args={[8, 1, 8]} />
-            <meshStandardMaterial color="white" />
+            <boxGeometry args={[8, 0.5, 8]} />
+            <meshStandardMaterial color="tan" />
           </mesh>
         </RigidBody>
 
-        <Float floatIntensity={4}>
-          <KanyeGlasses position={[1, 2, 0]}/>
-        </Float>
+        <RigidBody position={[-4, 1.5, 0]} type="fixed">
+          <mesh receiveShadow>
+            <boxGeometry args={[.5, 5, 8]} />
+            <meshStandardMaterial color="tan" />
+          </mesh>
+        </RigidBody>
+
+        <RigidBody position={[-0.25, 1.5, -4.5]} type="fixed">
+          <mesh receiveShadow>
+            <boxGeometry args={[8.5, 5, .5]} />
+            <meshStandardMaterial color="tan" />
+          </mesh>
+        </RigidBody>
+
+        <WoodFloor />
+
+        <TopHat
+          position={[3, 0.29, -3]}
+          scale={0.25}
+          rotation-y={Math.PI * 1}
+        />
+
+        <KanyeGlasses
+          position={[4, 2, -1]}
+          rotation-y={Math.PI * 0.5}
+          scale={0.5}
+          castShadow
+        />
+
+        <Mustache
+          position={[0, 2, 0]}
+          rotation-y={Math.PI * 0.5}
+          scale={0.02}
+        />
+
+        <CameraStand
+          position={[3, 1.5, 0]}
+          scale={0.5}
+          rotation-y={Math.PI * 0.5}
+        />
+        <TheaterSpotlight
+          position={[4, 4, -2.5]}
+          scale={0.2}
+          rotation-z={Math.PI * 0.75}
+          rotation-y={Math.PI * 0.3}
+        />
+        <TheaterSpotlight
+          position={[4, 4, 2.5]}
+          scale={0.2}
+          rotation-z={Math.PI * 0.75}
+          rotation-y={Math.PI * 0.3 * -1}
+        />
       </Physics>
     </>
   );
