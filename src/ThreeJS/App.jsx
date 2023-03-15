@@ -57,22 +57,22 @@ function App() {
         ref={directionalLightRef}
         intensity={1.5}
         castShadow
-        position={[10, 5, 0]}
+        position={[5, 2, 3]}
       />
 
       <Physics>
         {/* <Debug /> */}
 
-        {/* Floor */}
-        <RigidBody type="fixed" colliders="trimesh" position={[-2, 1.8, 2]}>
+
+        <RigidBody type="fixed" colliders="trimesh" position={[1.5, 3.5, -2.4]}>
           <Text3D
             font="./Bebas_Neue_Regular.json"
-            bevelThickness={0.2}
+            bevelThickness={0.1}
             letterSpacing={0}
-            size={0.9}
+            size={0.4}
             lineHeight={0.6}
             bevelEnabled
-            rotation-y={Math.PI * 0.5}
+            rotation-y={Math.PI * 2}
             castShadow
             receiveShadow
           >
@@ -81,26 +81,26 @@ function App() {
           </Text3D>
         </RigidBody>
 
-        <RigidBody type="fixed" position={[0, -0.5, 0]} restitution={1}>
+        {/* Floor */}
+        <RigidBody type="fixed" position={[-0.129, -0.1, -0.16]} restitution={1}>
           <mesh receiveShadow>
-            <boxGeometry args={[8, 0.5, 8]} />
-            <meshStandardMaterial color="tan" />
+            <boxGeometry args={[8, 0.2, 5.3]} />
+            <meshStandardMaterial color="#3a3a3a" />
           </mesh>
         </RigidBody>
 
-        <RigidBody position={[-4, 1.5, 0]} type="fixed">
-          <mesh receiveShadow>
-            <boxGeometry args={[.5, 5, 8]} />
+        {/* Wall Along Z-Axis */}
+          <mesh position={[-4.0, 2.25, 0]} receiveShadow>
+            <boxGeometry args={[.3, 4.5, 5]} />
             <meshStandardMaterial color="tan" />
           </mesh>
-        </RigidBody>
 
-        <RigidBody position={[-0.25, 1.5, -4.5]} type="fixed">
-          <mesh receiveShadow>
-            <boxGeometry args={[8.5, 5, .5]} />
+        {/* Wall Along X-Axis */}
+          <mesh position={[-0.16, 2.25, -2.65]} receiveShadow>
+            <boxGeometry args={[8.0, 4.5, .3]} />
             <meshStandardMaterial color="tan" />
           </mesh>
-        </RigidBody>
+       
 
         <WoodFloor />
 
@@ -128,7 +128,7 @@ function App() {
           scale={0.5}
           rotation-y={Math.PI * 0.5}
         />
-        <TheaterSpotlight
+        {/* <TheaterSpotlight
           position={[4, 4, -2.5]}
           scale={0.2}
           rotation-z={Math.PI * 0.75}
@@ -139,7 +139,7 @@ function App() {
           scale={0.2}
           rotation-z={Math.PI * 0.75}
           rotation-y={Math.PI * 0.3 * -1}
-        />
+        /> */}
       </Physics>
     </>
   );
