@@ -100,6 +100,34 @@ function App() {
             <boxGeometry args={[8.0, 4.5, .3]} />
             <meshStandardMaterial color="tan" />
           </mesh>
+
+        {/* Table */}
+          <mesh position={[1.2, 1, -2]}>
+            <boxGeometry args={[2.5, .1, 1.2]}/>
+            <meshStandardMaterial color='white  '/>
+          </mesh>
+
+          <mesh position={[0.1, .5, -1.5]}>
+            <boxGeometry args={[.1, 1, .1]}/>
+            <meshStandardMaterial color={"#ffa54f"}/>
+          </mesh>
+
+          <mesh position={[0.1, .5, -2.3]}>
+            <boxGeometry args={[.1, 1, .1]}/>
+            <meshStandardMaterial color={"#ffa54f"}/>
+          </mesh>
+
+
+          <mesh position={[2.3, .5, -1.5]}>
+            <boxGeometry args={[.1, 1, .1]}/>
+            <meshStandardMaterial color={"#ffa54f"}/>
+          </mesh>
+
+          <mesh position={[2.3, .5, -2.3]}>
+            <boxGeometry args={[.1, 1, .1]}/>
+            <meshStandardMaterial color={"#ffa54f"}/>
+          </mesh>
+       
        
 
         <WoodFloor />
@@ -111,9 +139,9 @@ function App() {
         />
 
         <KanyeGlasses
-          position={[4, 2, -1]}
-          rotation-y={Math.PI * 0.5}
-          scale={0.5}
+          position={[2, 1.379, -2]}
+          rotation-y={Math.PI * 0.3}
+          scale={0.2}
           castShadow
         />
 
@@ -123,11 +151,7 @@ function App() {
           scale={0.02}
         />
 
-        <CameraStand
-          position={[3, 1.5, 0]}
-          scale={0.5}
-          rotation-y={Math.PI * 0.5}
-        />
+       
         {/* <TheaterSpotlight
           position={[4, 4, -2.5]}
           scale={0.2}
