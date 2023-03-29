@@ -8,6 +8,7 @@ import {
   Text3D,
   useHelper,
   BakeShadows,
+  RoundedBox,
 } from "@react-three/drei";
 import { Perf } from "r3f-perf";
 import { Debug, Physics, RigidBody } from "@micmania1/react-three-rapier";
@@ -21,6 +22,8 @@ import { CameraStand } from "../assets/Models/CameraStand";
 import { AviatorGlasses } from "../assets/Models/AviatorGlasses";
 import { Mustache } from "../assets/Models/Mustache";
 import { TopHat } from "../assets/Models/Tophat";
+import { PhotoboothSlab } from "../assets/Models/PhotoboothSlab";
+
 
 function App() {
   /**
@@ -48,6 +51,8 @@ function App() {
   const directionalLightRef = useRef();
   useHelper(directionalLightRef, THREE.DirectionalLightHelper, 2);
 
+
+
   return (
     <>
       <Perf position="bottom-left" />
@@ -58,6 +63,7 @@ function App() {
         intensity={1.5}
         castShadow
         position={[5, 2, 3]}
+        color='white'
       />
 
       <Physics>
@@ -104,29 +110,35 @@ function App() {
         {/* Table */}
           <mesh position={[1.2, 1, -2]}>
             <boxGeometry args={[2.5, .1, 1.2]}/>
-            <meshStandardMaterial color='white  '/>
+            <meshStandardMaterial color='#bab198'/>
           </mesh>
 
           <mesh position={[0.1, .5, -1.5]}>
             <boxGeometry args={[.1, 1, .1]}/>
-            <meshStandardMaterial color={"#ffa54f"}/>
+            <meshStandardMaterial color={"black"}/>
           </mesh>
 
           <mesh position={[0.1, .5, -2.3]}>
             <boxGeometry args={[.1, 1, .1]}/>
-            <meshStandardMaterial color={"#ffa54f"}/>
+            <meshStandardMaterial color={"black"}/>
           </mesh>
 
 
           <mesh position={[2.3, .5, -1.5]}>
             <boxGeometry args={[.1, 1, .1]}/>
-            <meshStandardMaterial color={"#ffa54f"}/>
+            <meshStandardMaterial color={"black"}/>
           </mesh>
 
           <mesh position={[2.3, .5, -2.3]}>
             <boxGeometry args={[.1, 1, .1]}/>
-            <meshStandardMaterial color={"#ffa54f"}/>
+            <meshStandardMaterial color={"black"}/>
           </mesh>
+
+
+          <PhotoboothSlab/>
+
+
+
        
        
 
