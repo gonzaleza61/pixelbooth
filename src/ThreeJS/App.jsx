@@ -66,11 +66,9 @@ function App() {
         color='white'
       />
 
-      <Physics>
+   
         {/* <Debug /> */}
-
-
-        <RigidBody type="fixed" colliders="trimesh" position={[1.5, 3.5, -2.4]}>
+        
           <Text3D
             font="./Bebas_Neue_Regular.json"
             bevelThickness={0.1}
@@ -81,19 +79,33 @@ function App() {
             rotation-y={Math.PI * 2}
             castShadow
             receiveShadow
+            position={[1.5, 3.5, -2.4]}
           >
             {"HOUSTON\nPixel\nPhotobooth"}
             <meshStandardMaterial color={"red"} />
           </Text3D>
-        </RigidBody>
+
+          <Text3D
+            font="./Dancing Script_Regular.json"
+            letterSpacing={0}
+            size={0.4}
+            lineHeight={0.6}
+            rotation-y={Math.PI * 2}
+            castShadow
+            receiveShadow
+            position={[-2.5, 3.5, -2.4]}
+          >
+            {"   Just\nMarried"}
+            <meshStandardMaterial color={0x00aaff} />
+          </Text3D>
+      
 
         {/* Floor */}
-        <RigidBody type="fixed" position={[-0.129, -0.1, -0.16]} restitution={1}>
-          <mesh receiveShadow>
+          <mesh position={[-0.129, -0.1, -0.16]} receiveShadow>
             <boxGeometry args={[8, 0.2, 5.3]} />
             <meshStandardMaterial color="#3a3a3a" />
           </mesh>
-        </RigidBody>
+   
 
         {/* Wall Along Z-Axis */}
           <mesh position={[-4.0, 2.25, 0]} receiveShadow>
@@ -110,7 +122,7 @@ function App() {
         {/* Table */}
           <mesh position={[1.2, 1, -2]}>
             <boxGeometry args={[2.5, .1, 1.2]}/>
-            <meshStandardMaterial color='#bab198'/>
+            <meshStandardMaterial color='#FFFFFF'/>
           </mesh>
 
           <mesh position={[0.1, .5, -1.5]}>
@@ -144,24 +156,24 @@ function App() {
 
         <WoodFloor />
 
-        <TopHat
+        {/* <TopHat
           position={[3, 0.29, -3]}
           scale={0.25}
           rotation-y={Math.PI * 1}
-        />
+        /> */}
 
-        <KanyeGlasses
+        {/* <KanyeGlasses
           position={[2, 1.379, -2]}
           rotation-y={Math.PI * 0.3}
           scale={0.2}
           castShadow
-        />
+        /> */}
 
-        <Mustache
+        {/* <Mustache
           position={[0, 2, 0]}
           rotation-y={Math.PI * 0.5}
           scale={0.02}
-        />
+        /> */}
 
        
         {/* <TheaterSpotlight
@@ -176,7 +188,8 @@ function App() {
           rotation-z={Math.PI * 0.75}
           rotation-y={Math.PI * 0.3 * -1}
         /> */}
-      </Physics>
+     
+  
     </>
   );
 }

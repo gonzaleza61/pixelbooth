@@ -3,10 +3,10 @@ import * as THREE from "three";
 export function WoodFloor() {
   THREE.ColorManagement.legacyMode = false;
   const floorMaterial = new THREE.MeshStandardMaterial({
-    color: "#ffa54f",
+    color: "#dd9458",
     roughness: 0,
   });
-  const floorGeometry = new THREE.BoxGeometry(0.3, 0.08, 5);
+  const floorGeometry = new THREE.BoxGeometry(0.302, 0.08, 5);
 
   return (
     <>
