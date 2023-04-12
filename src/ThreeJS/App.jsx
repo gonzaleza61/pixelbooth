@@ -9,6 +9,8 @@ import {
   useHelper,
   BakeShadows,
   RoundedBox,
+  Text,
+  Html,
 } from "@react-three/drei";
 import { Perf } from "r3f-perf";
 import { Debug, Physics, RigidBody } from "@micmania1/react-three-rapier";
@@ -69,7 +71,7 @@ function App() {
    
         {/* <Debug /> */}
         
-          <Text3D
+          {/* <Text3D
             font="./Bebas_Neue_Regular.json"
             bevelThickness={0.1}
             letterSpacing={0}
@@ -83,9 +85,9 @@ function App() {
           >
             {"HOUSTON\nPixel\nPhotobooth"}
             <meshStandardMaterial color={"red"} />
-          </Text3D>
+          </Text3D> */}
 
-          <Text3D
+          {/* <Text3D
             font="./Dancing Script_Regular.json"
             letterSpacing={0}
             size={0.4}
@@ -96,31 +98,32 @@ function App() {
             position={[-2.5, 3.5, -2.4]}
           >
             {"   Just\nMarried"}
-            <meshStandardMaterial color={0x00aaff} />
-          </Text3D>
+            <meshPhongMaterial color={'#f2dc6e'} emissive={'#f2dc6e'} specular={'#111111'} shininess={30}/>
+          </Text3D> */}
+
       
 
         {/* Floor */}
-          <mesh position={[-0.129, -0.1, -0.16]} receiveShadow>
+          {/* <mesh position={[-0.129, -0.1, -0.16]} receiveShadow>
             <boxGeometry args={[8, 0.2, 5.3]} />
             <meshStandardMaterial color="#3a3a3a" />
-          </mesh>
+          </mesh> */}
    
 
         {/* Wall Along Z-Axis */}
-          <mesh position={[-4.0, 2.25, 0]} receiveShadow>
+          {/* <mesh position={[-4.0, 2.25, 0]} receiveShadow>
             <boxGeometry args={[.3, 4.5, 5]} />
             <meshStandardMaterial color="tan" />
-          </mesh>
+          </mesh> */}
 
         {/* Wall Along X-Axis */}
-          <mesh position={[-0.16, 2.25, -2.65]} receiveShadow>
+          {/* <mesh position={[-0.16, 2.25, -2.65]} receiveShadow>
             <boxGeometry args={[8.0, 4.5, .3]} />
             <meshStandardMaterial color="tan" />
-          </mesh>
+          </mesh> */}
 
         {/* Table */}
-          <mesh position={[1.2, 1, -2]}>
+          {/* <mesh position={[1.2, 1, -2]}>
             <boxGeometry args={[2.5, .1, 1.2]}/>
             <meshStandardMaterial color='#FFFFFF'/>
           </mesh>
@@ -144,17 +147,17 @@ function App() {
           <mesh position={[2.3, .5, -2.3]}>
             <boxGeometry args={[.1, 1, .1]}/>
             <meshStandardMaterial color={"black"}/>
-          </mesh>
+          </mesh> */}
 
-
+          <Float>
           <PhotoboothSlab/>
-
+          </Float>
 
 
        
        
 
-        <WoodFloor />
+        {/* <WoodFloor /> */}
 
         {/* <TopHat
           position={[3, 0.29, -3]}

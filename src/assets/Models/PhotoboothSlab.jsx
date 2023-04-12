@@ -10,7 +10,7 @@ export function PhotoboothSlab(props) {
   const { nodes, materials } = useGLTF("./models/photobooth.glb");
   return (
     <>
-      <group {...props} dispose={null} rotation-z={0.2}>
+      <group {...props} dispose={null} rotation-z={0.2} scale={3}>
         <mesh
           castShadow
           receiveShadow
@@ -27,6 +27,7 @@ export function PhotoboothSlab(props) {
         </mesh>
       </group>
 
+      <group scale={3}>
       <mesh position={[-2.9, 0.2, 1.8]}>
         <boxGeometry args={[1.5, 0.1, 0.1]} />
         <meshStandardMaterial />
@@ -46,6 +47,7 @@ export function PhotoboothSlab(props) {
         <boxGeometry args={[1.9, 0.1, 0.1]} />
         <meshStandardMaterial />
       </mesh>
+      </group>
 
     </>
   );
