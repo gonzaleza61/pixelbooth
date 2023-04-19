@@ -57,8 +57,7 @@ function App() {
 
   return (
     <>
-      <Perf position="bottom-left" />
-      <OrbitControls makeDefault />
+      <Perf position="bottom-right" />
       <ambientLight />
       <directionalLight
         ref={directionalLightRef}
