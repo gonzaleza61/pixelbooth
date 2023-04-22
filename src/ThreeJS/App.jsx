@@ -59,6 +59,7 @@ function App() {
     <>
       <Perf position="bottom-right" />
       <ambientLight />
+      <OrbitControls/>
       <directionalLight
         ref={directionalLightRef}
         intensity={1.5}
