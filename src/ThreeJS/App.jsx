@@ -52,7 +52,7 @@ function App() {
         <PhotoboothSlab />
       </Float>
 
-      <mesh ref={photoStripRef} position={[6, 5, 10]}>
+      <mesh ref={photoStripRef} position={[0, 0, 0]}>
         <planeGeometry args={[1, 3, 3]} />
         <meshStandardMaterial attach={"material"} map={texture} />
       </mesh>

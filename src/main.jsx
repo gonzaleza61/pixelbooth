@@ -19,7 +19,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       fov: 45,
       near: 0.1,
       far: 500,
-      position: [9, 8, 15],
+      position: [0, 0, 8],
   } }>
       <App />
     </Canvas>

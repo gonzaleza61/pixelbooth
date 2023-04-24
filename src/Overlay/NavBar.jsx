@@ -12,7 +12,7 @@ export default function NavBar() {
             Home
           </a>
         </div>
-        <div className="flex">
+        <div className="flex justify-center">
           <a
             className="flex h-full py-0 px-4 items-center cursor-pointer text-white font-medium"
             href="#"
