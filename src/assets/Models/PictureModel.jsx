@@ -4,7 +4,6 @@ import * as THREE from "three";
 import { useTexture } from "@react-three/drei";
 
 export function PictureModel() {
-  const meshRef = useRef();
   const meshOne = useRef();
   const meshTwo = useRef();
   const meshThree = useRef();
@@ -50,10 +49,6 @@ export function PictureModel() {
   });
   return (
     <>
-      <mesh ref={meshRef} position={[0, 0, 0]}>
-        <planeGeometry args={[0.2, 0.2]} />
-        <meshStandardMaterial color={"red"} />
-      </mesh>
 
       <mesh ref={meshOne} position={[0, 10, 0]}>
         <planeGeometry args={[5, 5]} />
