@@ -2,7 +2,6 @@ import {
   useGLTF,
   Float,
   useTexture,
-  OrbitControls,
   useHelper,
 } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
@@ -10,6 +9,7 @@ import { Perf } from "r3f-perf";
 import * as THREE from "three";
 import { useRef } from "react";
 import { PhotoboothSlab } from "../assets/Models/PhotoboothSlab";
+import { PictureModel } from "../assets/Models/PictureModel";
 
 function App() {
   /**
@@ -21,25 +21,24 @@ function App() {
   /**
    * Textures
    */
-  const texture = useTexture("./photostrip2.png");
+  // const texture = useTexture("./photostrip2.png");
 
   /**
    *  Ref
    */
-  const photoStripRef = useRef();
+  // const photoStripRef = useRef();
 
   /**
    * Animation
    */
-  useFrame(() => {
-    photoStripRef.current.position.y -= 0.01;
-  })
+  // useFrame(() => {
+  //   photoStripRef.current.position.y -= 0.01;
+  // });
 
   return (
     <>
       <Perf position="bottom-right" />
       <ambientLight />
-      <OrbitControls />
       <directionalLight
         ref={directionalLightRef}
         intensity={1.5}
@@ -52,10 +51,12 @@ function App() {
         <PhotoboothSlab />
       </Float>
 
-      <mesh ref={photoStripRef} position={[0, 0, 0]}>
-        <planeGeometry args={[1, 3, 3]} />
+      <PictureModel />
+
+      {/* <mesh ref={photoStripRef} position={[0, 0, 0]}>
+        <planeGeometry args={[2, 2, 2]} />
         <meshStandardMaterial attach={"material"} map={texture} />
-      </mesh>
+      </mesh> */}
     </>
   );
 }

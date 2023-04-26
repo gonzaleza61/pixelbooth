@@ -3,7 +3,7 @@ export default function HeroOverlay() {
     <div className="bg-transparent mix-blend-difference pointer-events-none">
       <div className="relative h-screen flex items-center justify-center pointer-events-none">
         <h1
-          className="text-white text-4xl tracking-tight font-extrabold mix-blend-difference sm:text-5xl md:text-6xl"
+          className="text-white text-4xl tracking-tight font-extrabold mix-blend-difference sm:text-5xl md:text-7xl"
           style={{ fontFamily: "Anton, sans-serif" }}
         >
           Houston
