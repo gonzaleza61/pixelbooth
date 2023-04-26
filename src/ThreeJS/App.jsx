@@ -47,9 +47,6 @@ function App() {
         color="white"
       />
 
-      <Float>
-        <PhotoboothSlab />
-      </Float>
 
       <PictureModel />
 
