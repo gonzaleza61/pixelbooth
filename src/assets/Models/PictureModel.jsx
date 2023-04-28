@@ -4,6 +4,8 @@ import * as THREE from "three";
 import { useTexture } from "@react-three/drei";
 
 export function PictureModel() {
+  const testRef = useRef();
+
   const meshOne = useRef();
   const meshTwo = useRef();
   const meshThree = useRef();
@@ -26,53 +28,58 @@ export function PictureModel() {
   textureArray.minFilter = THREE.NearestFilter;
   textureArray.magFilter = THREE.NearestFilter;
 
+
+
   useFrame((state) => {
-
-    console.log(state.pointer.x)
-
     v.copy({ x: state.pointer.x, y: state.pointer.y, z: 0 });
     v.unproject(state.camera);
-    
 
+    currentMesh.current.position.lerp({ x: v.x, y: v.y, z: v.z }, 0.1);
 
-    if(Math.abs(state.pointer.x - prevMouseX) > 0.2 ){
-      currentMesh.current.position.copy({x: v.x, y: v.y, z: v.z})
+    if (
+      Math.abs(state.pointer.x - prevMouseX) > 0.1 ||
+      Math.abs(state.pointer.y - prevMouseY) > 0.1
+    ) {
+      currentMesh.current.position.copy({ x: v.x, y: v.y, z: v.z });
 
+      if(state.pointer.x - prevMouseX > 0){
+        currentMesh.current.rotation.z = Math.PI * -.09
+      }else
+      {
+        currentMesh.current.rotation.z = Math.PI * .09
+      }
+
+      setNextMesh(meshArray[meshIndex]);
 
       // currentMesh.current.position.lerp({ x: v.x, y: v.y, z: v.z }, .1)
       // currentMesh.current.rotation.z += Math.PI * (v.x * .1)
-  
+
       if (meshIndex === meshArray.length - 1) {
         setNextMeshIndex(0);
       } else {
         setNextMeshIndex(meshIndex + 1);
       }
-  
-      setNextMesh(meshArray[meshIndex]);
-      setPrevMouseX(state.pointer.x)
+
+      setPrevMouseX(state.pointer.x);
+      setPrevMouseY(state.pointer.y)
     }
   });
 
-
   useFrame((state) => {
-    v.copy({ x:state.pointer.x, y:state.pointer.y, z:0})
-    v.unproject(state.camera)
-
-    // meshOne.current.position.lerp({x: v.x, y: v.y, z: v.z}, 0.001)
-    // meshTwo.current.position.lerp({x: v.x, y: v.y, z: v.z}, 0.01)
-    // meshThree.current.position.lerp({x: v.x, y: v.y, z: v.z}, 0.01)
-    // meshFour.current.position.lerp({x: v.x, y: v.y, z: v.z}, 0.01)
-    // meshFive.current.position.lerp({x: v.x, y: v.y, z: v.z}, 0.01)
-    // meshSix.current.position.lerp({x: v.x, y: v.y, z: v.z}, 0.01)
-
-
     meshOne.current.position.y -= .1
     meshTwo.current.position.y  -= .1
     meshThree.current.position.y  -= .1
     meshFour.current.position.y  -= .1
     meshFive.current.position.y  -= .1
-    meshSix.current.position.y  -= .1 
-  })
+    meshSix.current.position.y  -= .1
+  });
+
+  // useFrame((state, deltaTime) => {
+  //   v.copy({ x: state.pointer.x, y: state.pointer.y, z:0})
+  //   v.unproject(state.camera)
+
+  //   testRef.current.rotation.z -= v.x * deltaTime
+  // })
 
   // useFrame(({ mouse, clock }, deltaTime) => {
   //   // meshOne.current.rotation.z += Math.sin(deltaTime * currentRotationZ) * Math.PI * 0.005;
@@ -121,6 +128,12 @@ export function PictureModel() {
   // });
   return (
     <>
+      
+    {/* <mesh ref={testRef}>
+      <planeGeometry args={[4, 4, 4]}/>
+      <meshBasicMaterial color={'red'}/>
+    </mesh> */}
+
       <mesh ref={meshOne} position={[0, 10, 0]}>
         <planeGeometry args={[2.5, 3.25]} />
         <meshStandardMaterial map={textureArray} />
