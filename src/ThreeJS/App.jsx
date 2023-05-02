@@ -10,6 +10,7 @@ import * as THREE from "three";
 import { useRef } from "react";
 import { PhotoboothSlab } from "../assets/Models/PhotoboothSlab";
 import { PictureModel } from "../assets/Models/PictureModel";
+import PictureFrame from "../assets/Models/PictureFrame";
 
 function App() {
   /**
@@ -47,8 +48,8 @@ function App() {
         color="white"
       />
 
-
-      <PictureModel />
+      <PictureFrame/>
+      {/* <PictureModel /> */}
 
       {/* <mesh ref={photoStripRef} position={[0, 0, 0]}>
         <planeGeometry args={[2, 2, 2]} />
