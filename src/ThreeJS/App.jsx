@@ -48,8 +48,8 @@ function App() {
         color="white"
       />
 
-      <PictureFrame/>
-      {/* <PictureModel /> */}
+      {/* <PictureFrame/> */}
+      <PictureModel />
 
       {/* <mesh ref={photoStripRef} position={[0, 0, 0]}>
         <planeGeometry args={[2, 2, 2]} />

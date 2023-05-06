@@ -35,6 +35,7 @@ export function PictureModel() {
   const [meshIndex, setNextMeshIndex] = useState(0);
   const [currentMesh, setNextMesh] = useState(meshArray[meshIndex]);
   const [currentYDrop, setNextYDrop] = useState([0, 0, 0, 0, 0, 0]);
+  const [currentZRotation, setNextZRotation] = useState([0, 0, 0, 0, 0 ,0]);
 
   const v = new THREE.Vector3();
 
@@ -50,27 +51,28 @@ export function PictureModel() {
     v.copy({ x: state.pointer.x, y: state.pointer.y, z: 0 });
     v.unproject(state.camera);
 
+
   
+    currentMesh.current.rotation.set(0, 0, 0);
 
     if (
       Math.abs(state.pointer.x - prevMouseX) > 0.5 ||
       Math.abs(state.pointer.y - prevMouseY) > 0.5
     ) {
-      console.log(meshIndex);
-      console.log(currentYDrop);
       currentYDrop[meshIndex] = 0;
+      currentZRotation[meshIndex] = 0.004;
       setNextYDrop(currentYDrop);
       currentMesh.current.position.copy({ x: v.x, y: v.y, z: v.z });
 
-      if (state.pointer.x - prevMouseX > 0) {
-        currentMesh.current.rotation.z = Math.PI * -0.09;
-      } else {
-        currentMesh.current.rotation.z = Math.PI * 0.09;
-      }
+      // if (state.pointer.x - prevMouseX > 0) {
+      //   currentMesh.current.rotation.z = Math.PI * -0.09;
+      // } else {
+      //   currentMesh.current.rotation.z = Math.PI * 0.09;
+      // }
 
       setTimeout(() => {
         currentYDrop[meshIndex] = 0.1;
-      }, 5000);
+      }, 1000);
       setNextYDrop(currentYDrop);
       setNextMesh(meshArray[meshIndex]);
 
@@ -95,27 +97,32 @@ export function PictureModel() {
     meshFour.current.position.y -= currentYDrop[3];
     meshFive.current.position.y -= currentYDrop[4];
     meshSix.current.position.y -= currentYDrop[5];
+
+
+    meshOne.current.rotation.z -= currentZRotation[0];
+    meshTwo.current.rotation.z -= currentZRotation[1];
+    meshThree.current.rotation.z -= currentZRotation[2];
+    meshFour.current.rotation.z -= currentZRotation[3];
+    meshFive.current.rotation.z -= currentZRotation[4];
+    meshSix.current.rotation.z -= currentZRotation[5];
   });
 
-  useFrame(() => {
-    // Lerp the rotation
-    setCurrentRotation((currentRotation) => {
-      const nextRotation = THREE.MathUtils.lerp(
-        currentRotation,
-        targetRotation,
-        0.05 // Set the lerp amount to 0.05
-      );
-      testRef.current.rotation.z = nextRotation;
-      return nextRotation;
-    });
-  });
+  // useFrame(() => {
+  //   // Lerp the rotation
+  //   setCurrentRotation((currentRotation) => {
+  //     const nextRotation = THREE.MathUtils.lerp(
+  //       currentRotation,
+  //       targetRotation,
+  //       0.05 // Set the lerp amount to 0.05
+  //     );
+  //     testRef.current.rotation.z = nextRotation;
+  //     return nextRotation;
+  //   }); 
+  // });
+
 
   return (
     <>
-      <mesh ref={testRef}>
-        <planeGeometry args={[4, 4, 4]} />
-        <meshBasicMaterial color={"red"} />
-      </mesh>
 
       <mesh ref={meshOne} position={[0, 10, 0]}>
         <planeGeometry args={[2.5, 3.25]} />
