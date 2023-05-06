@@ -56,19 +56,20 @@ export function PictureModel() {
     currentMesh.current.rotation.set(0, 0, 0);
 
     if (
-      Math.abs(state.pointer.x - prevMouseX) > 0.5 ||
-      Math.abs(state.pointer.y - prevMouseY) > 0.5
+      Math.abs(state.pointer.x - prevMouseX) > 0.2 ||
+      Math.abs(state.pointer.y - prevMouseY) > 0.2
     ) {
       currentYDrop[meshIndex] = 0;
-      currentZRotation[meshIndex] = 0.004;
-      setNextYDrop(currentYDrop);
+
       currentMesh.current.position.copy({ x: v.x, y: v.y, z: v.z });
 
-      // if (state.pointer.x - prevMouseX > 0) {
-      //   currentMesh.current.rotation.z = Math.PI * -0.09;
-      // } else {
-      //   currentMesh.current.rotation.z = Math.PI * 0.09;
-      // }
+      if (state.pointer.x - prevMouseX > 0) {
+        currentZRotation[meshIndex] = 0.004;
+        setNextYDrop(currentYDrop);
+      } else {
+        currentZRotation[meshIndex] = -0.004;
+        setNextYDrop(currentYDrop);
+      }
 
       setTimeout(() => {
         currentYDrop[meshIndex] = 0.1;
