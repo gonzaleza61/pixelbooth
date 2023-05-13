@@ -79,7 +79,7 @@ export function PictureModel() {
   textureArray.magFilter = THREE.NearestFilter;
 
 
-  useFrame((state) => {
+  useFrame((state, delta) => {
     v.copy({ x: state.pointer.x, y: state.pointer.y, z: 0 });
     v.unproject(state.camera);
 
@@ -123,7 +123,9 @@ export function PictureModel() {
     }
   });
 
-  useFrame((state) => {
+  useFrame((state, delta) => {
+
+
     meshOne.current.position.y -= currentYDrop[0];
     meshTwo.current.position.y -= currentYDrop[1];
     meshThree.current.position.y -= currentYDrop[2];
