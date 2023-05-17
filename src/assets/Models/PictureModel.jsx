@@ -12,6 +12,15 @@ export function PictureModel() {
    * Test Ref
    */
   const testRef = useRef();
+  const initialY = 4;
+  const gravity = 0.06;
+  const acceleration = 0.5;
+
+  const easeOutQuad = (t) => t * t;
+
+  let time = 0;
+  let velocity = 0;
+
   const [currentRotation, setCurrentRotation] = useState(0);
 
   const targetRotation = Math.PI * 0.1;
@@ -19,6 +28,7 @@ export function PictureModel() {
   /**
    * Refs
    */
+
   const meshOne = useRef();
   const meshTwo = useRef();
   const meshThree = useRef();
@@ -78,7 +88,6 @@ export function PictureModel() {
   textureArray.minFilter = THREE.NearestFilter;
   textureArray.magFilter = THREE.NearestFilter;
 
-
   useFrame((state, delta) => {
     v.copy({ x: state.pointer.x, y: state.pointer.y, z: 0 });
     v.unproject(state.camera);
@@ -124,8 +133,6 @@ export function PictureModel() {
   });
 
   useFrame((state, delta) => {
-
-
     meshOne.current.position.y -= currentYDrop[0];
     meshTwo.current.position.y -= currentYDrop[1];
     meshThree.current.position.y -= currentYDrop[2];
@@ -163,18 +170,20 @@ export function PictureModel() {
     meshSeventeen.current.rotation.z -= currentZRotation[16];
   });
 
-  // useFrame(() => {
-  //   // Lerp the rotation
-  //   setCurrentRotation((currentRotation) => {
-  //     const nextRotation = THREE.MathUtils.lerp(
-  //       currentRotation,
-  //       targetRotation,
-  //       0.05 // Set the lerp amount to 0.05
-  //     );
-  //     testRef.current.rotation.z = nextRotation;
-  //     return nextRotation;
-  //   });
-  // });
+  useFrame((state, delta) => {
+    time += delta; 
+
+    velocity += gravity * acceleration
+
+    const newY = initialY - easeOutQuad(time) * velocity;
+    testRef.current.position.y = newY
+
+    if (testRef.current.position.y < -10) {
+      time = 0;
+      velocity = 0;
+      testRef.current.position.y = initialY;
+    }
+  });
 
   return (
     <>
@@ -252,6 +261,11 @@ export function PictureModel() {
       <mesh ref={meshSeventeen} position={[0, 10, 0]}>
         <planeGeometry args={[2.5, 3.25]} />
         <meshStandardMaterial color={"lightgray"} />
+      </mesh>
+
+      <mesh ref={testRef} position={[0, initialY, 0]}>
+        <planeGeometry args={[5, 5]} />
+        <meshBasicMaterial color={"red"} />
       </mesh>
     </>
   );
