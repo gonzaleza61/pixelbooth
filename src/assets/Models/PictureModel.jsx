@@ -3,9 +3,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { useTexture } from "@react-three/drei";
 
-function lerp(start, end, t) {
-  return start * (1 - t) + end * t;
-}
+
 
 export function PictureModel() {
   /**
@@ -118,8 +116,6 @@ export function PictureModel() {
       setNextYDrop(currentYDrop);
       setNextMesh(meshArray[meshIndex]);
 
-      // currentMesh.current.position.lerp({ x: v.x, y: v.y, z: v.z }, .1)
-      // currentMesh.current.rotation.z += Math.PI * (v.x * .1)
 
       if (meshIndex === meshArray.length - 1) {
         setNextMeshIndex(0);
