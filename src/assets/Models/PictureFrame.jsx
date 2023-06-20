@@ -3,48 +3,51 @@ import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { useTexture } from "@react-three/drei";
 
-export function MeshPicture({ position, meshRef }) {
-  const JoeBiden = "joebiden";
 
-  return (
-    <>
-      <mesh position={position} ref={meshRef}>
-        <boxGeometry args={[5, 5, 5]} />
-        <meshBasicMaterial color={"red"} />
-      </mesh>
-    </>
-  );
-}
 
 export default function PictureFrame() {
-  const meshRef = useRef();
-  const v = new THREE.Vector3();
-  const [position, setPosition] = useState([0, 0, 0]);
 
-  const meshDummyRef = useRef();
+  const meshOneRef = useRef() 
+  const gravity = 0.3
+  const acceleration = 0.05
 
-  useFrame((state) => {
-    v.copy({ x: state.pointer.x, y: state.pointer.y, z: 0 });
-    v.unproject(state.camera);
 
-    setPosition([v.x, v.y, v.z]);
-  });
+  let time = 0;
+  let velocity = 0;
 
-  useFrame(({ clock }) => {
-    const delta = clock.getDelta();
 
-    console.log(delta);
+  const v = new THREE.Vector3()
 
-    meshDummyRef.current.rotation.y -= Math.PI * (delta * 100);
-  });
+
+  useFrame(({pointer, camera}, delta) => {
+    v.copy({ x: pointer.x, y: pointer.y, z: 0 });
+    v.unproject(camera);
+
+    meshOneRef.current.position.copy({ x: v.x, y: v.y, z: v.z });
+    
+    time += delta; 
+    velocity += gravity * acceleration;
+    
+    let easingFunction = (time * time) * velocity;
+
+    console.log(easingFunction)
+
+    meshOneRef.current.position.y -= easingFunction;
+
+    // setTimeout(() => {
+    //   time = 0; 
+    //   meshOneRef.current.position.y = 0;
+    // }, 5000)
+  })
+
+
 
   return (
     <>
-      <mesh meshRef={meshDummyRef} position={[0, 0, 0]}>
-        <boxGeometry />
-        <meshStandardMaterial color={'red'} />
+      <mesh ref={meshOneRef} position={[0, 0, 0]}>
+        <planeGeometry args={[2.5, 3.25]} />
+        <meshStandardMaterial color={"red"} />
       </mesh>
-      {/* <MeshPicture position={position} /> */}
     </>
   );
 }

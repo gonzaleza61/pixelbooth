@@ -11,7 +11,7 @@ export function PictureModel() {
    */
   const testRef = useRef();
   const initialY = 4;
-  const gravity = 0.06;
+  const gravity = 0.6;
   const acceleration = 0.5;
 
   const easeOutQuad = (t) => t * t;
@@ -86,21 +86,21 @@ export function PictureModel() {
   textureArray.minFilter = THREE.NearestFilter;
   textureArray.magFilter = THREE.NearestFilter;
 
-  useFrame((state, delta) => {
-    v.copy({ x: state.pointer.x, y: state.pointer.y, z: 0 });
-    v.unproject(state.camera);
+  useFrame(({pointer, camera}) => {
+    v.copy({ x: pointer.x, y: pointer.y, z: 0 });
+    v.unproject(camera);
 
     currentMesh.current.rotation.set(0, 0, 0);
 
     if (
-      Math.abs(state.pointer.x - prevMouseX) >= 0.2 ||
-      Math.abs(state.pointer.y - prevMouseY) >= 0.2
+      Math.abs(pointer.x - prevMouseX) >= 0.2 ||
+      Math.abs(pointer.y - prevMouseY) >= 0.2
     ) {
       currentYDrop[meshIndex] = 0;
 
       currentMesh.current.position.copy({ x: v.x, y: v.y, z: v.z });
 
-      if (state.pointer.x - prevMouseX > 0) {
+      if (pointer.x - prevMouseX > 0) {
         currentZRotation[meshIndex] = 0.006;
         setNextYDrop(currentYDrop);
       } else {
@@ -123,29 +123,35 @@ export function PictureModel() {
         setNextMeshIndex(meshIndex + 1);
       }
 
-      setPrevMouseX(state.pointer.x);
-      setPrevMouseY(state.pointer.y);
+      setPrevMouseX(pointer.x);
+      setPrevMouseY(pointer.y);
     }
   });
 
   useFrame((state, delta) => {
-    meshOne.current.position.y -= currentYDrop[0];
-    meshTwo.current.position.y -= currentYDrop[1];
-    meshThree.current.position.y -= currentYDrop[2];
-    meshFour.current.position.y -= currentYDrop[3];
-    meshFive.current.position.y -= currentYDrop[4];
-    meshSix.current.position.y -= currentYDrop[5];
-    meshSeven.current.position.y -= currentYDrop[6];
-    meshEight.current.position.y -= currentYDrop[7];
-    meshNine.current.position.y -= currentYDrop[8];
-    meshTen.current.position.y -= currentYDrop[9];
-    meshEleven.current.position.y -= currentYDrop[10];
-    meshTwelve.current.position.y -= currentYDrop[11];
-    meshThirteen.current.position.y -= currentYDrop[12];
-    meshFourteen.current.position.y -= currentYDrop[13];
-    meshFifteen.current.position.y -= currentYDrop[14];
-    meshSixteen.current.position.y -= currentYDrop[15];
-    meshSeventeen.current.position.y -= currentYDrop[16];
+    time += delta;
+    velocity += gravity * acceleration
+
+    let easingFunction = (time * time) * velocity;
+
+    // meshOne.current.position.y -= currentYDrop[0];
+    meshOne.current.position.y -= currentYDrop[0] * easingFunction;
+    meshTwo.current.position.y -= currentYDrop[1] * easingFunction;
+    meshThree.current.position.y -= currentYDrop[2] * easingFunction;
+    meshFour.current.position.y -= currentYDrop[3] * easingFunction;
+    meshFive.current.position.y -= currentYDrop[4] * easingFunction;
+    meshSix.current.position.y -= currentYDrop[5] * easingFunction;
+    meshSeven.current.position.y -= currentYDrop[6] * easingFunction;
+    meshEight.current.position.y -= currentYDrop[7] * easingFunction;
+    meshNine.current.position.y -= currentYDrop[8] * easingFunction;
+    meshTen.current.position.y -= currentYDrop[9] * easingFunction;
+    meshEleven.current.position.y -= currentYDrop[10] * easingFunction;
+    meshTwelve.current.position.y -= currentYDrop[11] * easingFunction;
+    meshThirteen.current.position.y -= currentYDrop[12] * easingFunction;
+    meshFourteen.current.position.y -= currentYDrop[13] * easingFunction;
+    meshFifteen.current.position.y -= currentYDrop[14] * easingFunction;
+    meshSixteen.current.position.y -= currentYDrop[15] * easingFunction;
+    meshSeventeen.current.position.y -= currentYDrop[16] * easingFunction;
 
     meshOne.current.rotation.z -= currentZRotation[0];
     meshTwo.current.rotation.z -= currentZRotation[1];
@@ -166,103 +172,100 @@ export function PictureModel() {
     meshSeventeen.current.rotation.z -= currentZRotation[16];
   });
 
-  useFrame((state, delta) => {
-    time += delta; 
+  // useFrame((state, delta) => {
+  //   time += delta; 
 
-    velocity += gravity * acceleration
+  //   velocity += gravity * acceleration
 
-    const newY = initialY - easeOutQuad(time) * velocity;
-    testRef.current.position.y = newY
+  //   const newY = initialY - easeOutQuad(time) * velocity;
+  //   testRef.current.position.y = newY
 
-    if (testRef.current.position.y < -10) {
-      time = 0;
-      velocity = 0;
-      testRef.current.position.y = initialY;
-    }
-  });
+  //   if (testRef.current.position.y < -10) {
+  //     time = 0;
+  //     velocity = 0;
+  //     testRef.current.position.y = initialY;
+  //   }
+  // });
 
   return (
     <>
-      <mesh ref={meshOne} position={[0, 10, 0]}>
+      <mesh ref={meshOne} position={[0, -20, 0]}>
         <planeGeometry args={[2.5, 3.25]} />
-        <meshStandardMaterial color={"red"} />
+        <meshStandardMaterial color={"pink"} />
       </mesh>
 
-      <mesh ref={meshTwo} position={[0, 10, 0]}>
+      <mesh ref={meshTwo} position={[0, -20, 0]}>
         <planeGeometry args={[2.5, 3.25]} />
         <meshStandardMaterial color={"green"} />
       </mesh>
 
-      <mesh ref={meshThree} position={[0, 10, 0]}>
+      <mesh ref={meshThree} position={[0, -20, 0]}>
         <planeGeometry args={[2.5, 3.25]} />
         <meshStandardMaterial color={"blue"} />
       </mesh>
 
-      <mesh ref={meshFour} position={[0, 10, 0]}>
+      <mesh ref={meshFour} position={[0, -20, 0]}>
         <planeGeometry args={[2.5, 3.25]} />
         <meshStandardMaterial color={"yellow"} />
       </mesh>
 
-      <mesh ref={meshFive} position={[0, 10, 0]}>
+      <mesh ref={meshFive} position={[0, -20, 0]}>
         <planeGeometry args={[2.5, 3.25]} />
         <meshStandardMaterial color={"brown"} />
       </mesh>
 
-      <mesh ref={meshSix} position={[0, 10, 0]}>
+      <mesh ref={meshSix} position={[0, -20, 0]}>
         <planeGeometry args={[2.5, 3.25]} />
         <meshStandardMaterial color={"white"} />
       </mesh>
 
-      <mesh ref={meshSeven} position={[0, 10, 0]}>
+      <mesh ref={meshSeven} position={[0, -20, 0]}>
         <planeGeometry args={[2.5, 3.25]} />
         <meshStandardMaterial color={"purple"} />
       </mesh>
 
-      <mesh ref={meshEight} position={[0, 10, 0]}>
+      <mesh ref={meshEight} position={[0, -20, 0]}>
         <planeGeometry args={[2.5, 3.25]} />
         <meshStandardMaterial color={"gray"} />
       </mesh>
-      <mesh ref={meshNine} position={[0, 10, 0]}>
+      <mesh ref={meshNine} position={[0, -20, 0]}>
         <planeGeometry args={[2.5, 3.25]} />
         <meshStandardMaterial color={"tan"} />
       </mesh>
-      <mesh ref={meshTen} position={[0, 10, 0]}>
+      <mesh ref={meshTen} position={[0, -20, 0]}>
         <planeGeometry args={[2.5, 3.25]} />
         <meshStandardMaterial color={"orange"} />
       </mesh>
-      <mesh ref={meshEleven} position={[0, 10, 0]}>
+      <mesh ref={meshEleven} position={[0, -20, 0]}>
         <planeGeometry args={[2.5, 3.25]} />
         <meshStandardMaterial color={"lightgreen"} />
       </mesh>
-      <mesh ref={meshTwelve} position={[0, 10, 0]}>
+      <mesh ref={meshTwelve} position={[0, -20, 0]}>
         <planeGeometry args={[2.5, 3.25]} />
         <meshStandardMaterial color={"darkgreen"} />
       </mesh>
-      <mesh ref={meshThirteen} position={[0, 10, 0]}>
+      <mesh ref={meshThirteen} position={[0, -20, 0]}>
         <planeGeometry args={[2.5, 3.25]} />
         <meshStandardMaterial color={"darkred"} />
       </mesh>
-      <mesh ref={meshFourteen} position={[0, 10, 0]}>
+      <mesh ref={meshFourteen} position={[0, -20, 0]}>
         <planeGeometry args={[2.5, 3.25]} />
         <meshStandardMaterial color={"darkyellow"} />
       </mesh>
-      <mesh ref={meshFifteen} position={[0, 10, 0]}>
+      <mesh ref={meshFifteen} position={[0, -20, 0]}>
         <planeGeometry args={[2.5, 3.25]} />
         <meshStandardMaterial color={"lightred"} />
       </mesh>
-      <mesh ref={meshSixteen} position={[0, 10, 0]}>
+      <mesh ref={meshSixteen} position={[0, -20, 0]}>
         <planeGeometry args={[2.5, 3.25]} />
         <meshStandardMaterial color={"lightblue"} />
       </mesh>
-      <mesh ref={meshSeventeen} position={[0, 10, 0]}>
+      <mesh ref={meshSeventeen} position={[0, -20, 0]}>
         <planeGeometry args={[2.5, 3.25]} />
         <meshStandardMaterial color={"lightgray"} />
       </mesh>
 
-      <mesh ref={testRef} position={[0, initialY, 0]}>
-        <planeGeometry args={[5, 5]} />
-        <meshBasicMaterial color={"red"} />
-      </mesh>
+
     </>
   );
 }
