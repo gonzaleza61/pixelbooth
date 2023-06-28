@@ -90,6 +90,8 @@ export function PictureModel() {
     v.copy({ x: pointer.x, y: pointer.y, z: 0 });
     v.unproject(camera);
 
+    console.log('joe')
+
     currentMesh.current.rotation.set(0, 0, 0);
 
     if (
@@ -113,6 +115,8 @@ export function PictureModel() {
         currentZRotation[meshIndex] = 0;
         setNextZRotation(currentZRotation);
       }, 600);
+      
+
       setNextYDrop(currentYDrop);
       setNextMesh(meshArray[meshIndex]);
 
@@ -129,10 +133,14 @@ export function PictureModel() {
   });
 
   useFrame((state, delta) => {
+    console.log('biden')
+
     time += delta;
     velocity += gravity * acceleration
 
-    let easingFunction = (time * time) * velocity;
+    const easingFunction = (time * time) * velocity;
+
+    console.log(easingFunction)
 
     // meshOne.current.position.y -= currentYDrop[0];
     meshOne.current.position.y -= currentYDrop[0] * easingFunction;

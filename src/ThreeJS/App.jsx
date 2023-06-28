@@ -8,7 +8,6 @@ import { useFrame } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
 import * as THREE from "three";
 import { useRef } from "react";
-import { PhotoboothSlab } from "../assets/Models/PhotoboothSlab";
 import { PictureModel } from "../assets/Models/PictureModel";
 import PictureFrame from "../assets/Models/PictureFrame";
 
